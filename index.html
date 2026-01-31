@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Kolay Puantaj | Ücretsiz Personel Takip Sistemi</title>
+
+    <meta name="description" content="Ücretsiz, internetsiz çalışan personel puantaj takip sistemi. Maaş hesaplama, Excel raporlama ve günlük işçi takibi yapın.">
+    <meta name="keywords" content="puantaj, personel takip, maaş hesaplama, işçi yevmiye, excel indir, ücretsiz puantaj, şantiye takip">
+    <meta name="author" content="ADINIZ SOYADINIZ"> <meta property="og:title" content="Kolay Puantaj Sistemi">
+    <meta property="og:description" content="İşçilerinizi takip edin, maaşlarını hesaplayın ve tek tıkla Excel'e aktarın.">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb"> <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+</head>
+<body>
+
+   <header>
+    <div class="header-content">
+        
+        <div class="ust-satir">
+            <div class="logo-alani">
+                <i class="fa-solid fa-clipboard-user"></i>
+                <h1>Pratik Puantaj</h1>
+            </div>
+            
+            <div class="sag-butonlar">
+                <button class="theme-btn" onclick="temaDegistir()" title="Tema">
+                    <i class="fa-solid fa-moon" id="tema-ikon"></i>
+                </button>
+                <button class="excel-btn-mini" onclick="excelModalAc()" title="Excel">
+                    <i class="fa-solid fa-file-excel"></i>
+                </button>
+                <button class="ekle-btn-mini" onclick="ekleModalAc()" title="Ekle">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="alt-satir">
+            <div class="maliyet-badge">
+                <div class="para-ikon"><i class="fa-solid fa-coins"></i></div>
+                <div class="para-detay">
+                    <span>Günlük</span>
+                    <strong id="gunluk-maliyet">0 ₺</strong>
+                </div>
+            </div>
+            
+            <div class="tarih-kontrol">
+                <button class="tarih-btn" onclick="tarihDegistir(-1)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                
+                <div class="tarih-alani" onclick="takvimiAc()">
+                    <span id="bugun-tarih">...</span>
+                    <input type="date" id="tarih-secici" onchange="takvimdenGit()">
+                </div>
+
+                <button class="tarih-btn" onclick="tarihDegistir(1)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</header>
+    <main class="container">
+        <div id="bos-durum" class="bos-mesaj" style="display: none;">
+            <div class="bos-ikon"><i class="fa-solid fa-user-plus"></i></div>
+            <h3>Puantaj Listeniz Boş</h3>
+            <p>Sağ alttaki <b>(+)</b> butonuna basarak<br>ekip arkadaşlarınızı ekleyin.</p>
+        </div>
+        
+        <div id="liste-alani"></div>
+    </main>
+
+    
+
+    <div id="ekle-modal" class="modal-dis">
+        <div class="modal-ic">
+            <div class="modal-baslik">
+                <h2>Yeni Personel</h2>
+                <button onclick="ekleModalKapat()" class="kapat-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <input type="text" id="yeni-ad" placeholder="Ad Soyad">
+            <input type="text" id="yeni-gorev" placeholder="Görevi (Örn: Usta, Kalfa)">
+            <input type="number" id="yeni-ucret" placeholder="Günlük Yevmiye (TL)">
+            <button onclick="yeniCalisanKaydet()" class="btn-full btn-primary">Kaydet</button>
+        </div>
+    </div>
+
+    <div id="islem-modal" class="modal-dis">
+        <div class="modal-ic">
+            <div class="modal-baslik">
+                <h2 id="islem-ad">Personel</h2>
+                <button onclick="islemModalKapat()" class="kapat-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="hesap-ozeti">
+                <div class="ozet-kutu">
+                    <span>Hakediş Toplamı</span>
+                    <strong class="text-yesil" id="ozet-hakedis">0</strong>
+                </div>
+                <div class="ozet-kutu">
+                    <span>Verilen Para</span>
+                    <strong class="text-turuncu" id="ozet-odenen">0</strong>
+                </div>
+            </div>
+            
+            <div class="bakiye-sonuc-kutusu" id="bakiye-kutusu">
+                <span id="bakiye-etiket">DURUM</span>
+                <strong id="ozet-kalan">0 TL</strong>
+            </div>
+
+            <hr>
+
+            <label>Günün Notu</label>
+            <textarea id="islem-not" rows="2" placeholder="Not giriniz..."></textarea>
+            <button onclick="notKaydet()" class="btn-full btn-primary">Notu Kaydet</button>
+
+            <label style="margin-top:15px; display:block; font-weight:600;">Para Ver (Ödeme/Avans)</label>
+            <div class="input-group">
+                <input type="number" id="odeme-miktar" placeholder="Tutar (TL)">
+                <button onclick="odemeYap()" class="btn-success">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="duzenle-modal" class="modal-dis">
+        <div class="modal-ic">
+            <div class="modal-baslik"><h2>Düzenle</h2><button onclick="duzenleModalKapat()" class="kapat-btn"><i class="fa-solid fa-xmark"></i></button></div>
+            <input type="text" id="duz-ad">
+            <input type="text" id="duz-gorev">
+            <input type="number" id="duz-ucret">
+            <button onclick="duzenleKaydet()" class="btn-full btn-primary">Güncelle</button>
+        </div>
+    </div>
+
+    <div id="onay-modal" class="modal-dis">
+        <div class="modal-ic center">
+            <i class="fa-solid fa-trash-can icon-buyuk text-kirmizi"></i>
+            <h2>Silinsin mi?</h2>
+            <p>Geçmişe dönük tüm kayıtlar silinecek.</p>
+            <div class="btn-group">
+                <button onclick="onayKapat()" class="btn-full btn-secondary">Vazgeç</button>
+                <button onclick="silmeIsleminiTamamla()" class="btn-full btn-danger">Evet, Sil</button>
+            </div>
+        </div>
+    </div>
+
+   <div id="excel-modal" class="modal-dis">
+    <div class="modal-ic">
+        <div class="modal-baslik">
+            <h2>Excel İndir</h2>
+            <button onclick="excelModalKapat()" class="kapat-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <button onclick="excelIndir('aylik')" class="excel-btn-standard mavi-btn">
+    <i class="fa-regular fa-calendar-check"></i> 
+    Bu Ayın Özeti
+</button>
+        
+        <div class="excel-buton-grubu">
+            
+            <button onclick="excelIndir('gunluk')" class="excel-btn-standard yesil-btn">
+                <i class="fa-solid fa-calendar-day"></i> 
+                Bugünkü Liste
+            </button>
+            
+            <button onclick="excelIndir('genel')" class="excel-btn-standard yesil-koyu-btn">
+                <i class="fa-solid fa-table-list"></i> 
+                Tüm Bakiye Listesi
+            </button>
+            
+            <button onclick="excelModalKapat()" class="excel-btn-standard gri-btn">
+                Kapat
+            </button>
+            
+        </div>
+    </div>
+</div>
+
+    <div id="toast">İşlem Tamam</div>
+    
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script src="app.js"></script></body>
+</html>

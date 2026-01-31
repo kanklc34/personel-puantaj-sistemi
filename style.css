@@ -1,0 +1,366 @@
+:root {
+    --primary: #2563eb; 
+    --primary-hover: #1d4ed8;
+    --bg: #f1f5f9;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --success: #16a34a; 
+    --danger: #dc2626; 
+    --warning: #ca8a04; 
+    --input-bg: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --excel-color: #16a34a; 
+}
+
+[data-theme="dark"] {
+    --primary: #3b82f6;
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #f8fafc;
+    --text-light: #94a3b8;
+    --border: #334155;
+    --input-bg: #0f172a;
+    --shadow: 0 4px 15px rgba(0,0,0,0.3);
+    
+    color-scheme: dark; 
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+body { background-color: var(--bg); color: var(--text); padding-bottom: 100px; }
+
+header {
+    background-color: var(--card-bg);
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    padding: 15px 12px; 
+    box-shadow: var(--shadow);
+}
+.header-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+}
+
+.ust-satir {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.alt-satir {
+    display: flex; 
+    gap: 10px; 
+    align-items: stretch; 
+}
+
+.baslik-ust {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+}
+.logo-alani { display: flex; align-items: center; gap: 10px; color: var(--primary); }
+.logo-alani h1 { font-size: 1.3rem; font-weight: 700; }
+.logo-alani i { font-size: 1.2rem; }
+
+.sag-butonlar { display: flex; gap: 8px; }
+
+.theme-btn {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    width: 40px; height: 40px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.theme-btn:hover { color: var(--primary); border-color: var(--primary); }
+
+.excel-btn-mini {
+    background: var(--excel-color); border: none; color: white;
+    width: 40px; height: 40px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(22, 163, 74, 0.3);
+}
+.excel-btn-mini:hover { background: #15803d; }
+
+.maliyet-badge {
+    flex: 4; 
+    background-color: rgba(37, 99, 235, 0.1); 
+    color: var(--primary);
+    padding: 8px 12px;
+    border-radius: 10px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.para-ikon { font-size: 1.2rem; }
+.para-detay { display: flex; flex-direction: column; line-height: 1.1; }
+.para-detay span { font-size: 0.7rem; opacity: 0.8; }
+.para-detay strong { font-size: 1rem; }
+
+.ekle-btn-mini {
+    background: var(--primary); 
+    border: none; 
+    color: white;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+}
+.ekle-btn-mini:hover { 
+    background: var(--primary-hover); 
+    transform: translateY(-2px);
+}
+
+.tarih-kontrol {
+    flex: 6; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    background: var(--bg); 
+    padding: 5px; 
+    border-radius: 10px; 
+    border: 1px solid var(--border);
+    position: relative;
+}
+.tarih-alani { 
+    flex-grow: 1; 
+    text-align: center;
+    font-weight: 600; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    color: var(--text);
+    cursor: pointer; 
+    user-select: none; 
+}
+#tarih-secici {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0; 
+    height: 0;
+    opacity: 0; 
+    border: none;
+    padding: 0;
+    margin: 0;
+    z-index: -1; 
+}
+.tarih-btn { 
+    background: none; 
+    border: none; 
+    color: var(--text-light); 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    z-index: 20; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tarih-btn:hover { background: var(--card-bg); color: var(--primary); }
+
+.container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+
+.isci-kart {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 15px; margin-bottom: 15px;
+    box-shadow: var(--shadow);
+}
+
+.kart-ust { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.sol { display: flex; gap: 12px; align-items: center; }
+.avatar {
+    width: 42px; height: 42px; background: var(--primary);
+    color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.1rem;
+}
+.bilgi h3 { font-size: 1rem; color: var(--text); margin-bottom: 2px; }
+.bilgi p { font-size: 0.85rem; color: var(--text-light); }
+
+.ayarlar button { background: none; border: none; color: var(--text-light); cursor: pointer; padding: 5px; font-size: 1.1rem; }
+.ayarlar button:hover { color: var(--primary); }
+
+.aksiyonlar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.btn-durum {
+    padding: 10px 0; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text-light); font-size: 0.9rem; cursor: pointer; font-weight: 500;
+}
+.btn-durum:hover { background: var(--border); }
+
+.var.aktif { background: var(--success); color: white; border-color: var(--success); }
+.yarim.aktif { background: var(--warning); color: white; border-color: var(--warning); }
+.izinli.aktif { background: #8b5cf6; color: white; border-color: #8b5cf6; }
+.yok.aktif { background: var(--danger); color: white; border-color: var(--danger); }
+
+
+.kart-alt {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border); padding-top: 10px;
+}
+.bakiye-bilgi { font-weight: 600; font-size: 0.9rem; }
+.text-yesil { color: var(--success); }
+.text-kirmizi { color: var(--danger); }
+.text-gri { color: var(--text-light); }
+.text-turuncu { color: var(--warning); }
+
+.btn-hesap {
+    background: transparent; border: 1px solid var(--primary); color: var(--primary);
+    padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
+}
+.btn-hesap:hover { background: var(--primary); color: white; }
+
+
+
+
+.modal-dis { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+.modal-ic { background: var(--card-bg); padding: 20px; border-radius: 16px; width: 90%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.modal-ic.center { text-align: center; }
+
+.modal-baslik { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: var(--text); }
+.kapat-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-light); }
+
+input, textarea {
+    width: 100%; padding: 12px; margin-bottom: 10px;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--input-bg); color: var(--text); font-size: 1rem; outline: none;
+}
+input:focus, textarea:focus { border-color: var(--primary); }
+
+.hesap-ozeti { display: flex; gap: 10px; margin-bottom: 10px; }
+.ozet-kutu { flex: 1; background: var(--bg); padding: 10px; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+.ozet-kutu span { font-size: 0.75rem; display: block; color: var(--text-light); }
+.ozet-kutu strong { font-size: 1.1rem; }
+
+.bakiye-sonuc-kutusu {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 15px;
+}
+.bakiye-sonuc-kutusu span { display: block; font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px; }
+.bakiye-sonuc-kutusu strong { font-size: 1.2rem; display: block; }
+
+.btn-full { width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; margin-top: 5px; font-size: 1rem; }
+.btn-primary { background: var(--primary); }
+.btn-secondary { background: var(--text-light); }
+.btn-danger { background: var(--danger); }
+.btn-success { background: var(--success); border: none; border-radius: 8px; color: white; padding: 0 20px; font-weight: 600; cursor: pointer; }
+.btn-excel { background: var(--excel-color); }
+.btn-group { display: flex; gap: 10px; }
+.mb-10 { margin-bottom: 10px; }
+.input-group { display: flex; gap: 10px; }
+
+#toast {
+    display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+    background: #333; color: white; padding: 10px 20px; border-radius: 20px;
+    z-index: 3000; font-size: 0.9rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.excel-buton-grubu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    margin-top: 10px;
+}
+
+
+.excel-btn-standard {
+    width: 100%;
+    height: 50px; 
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.excel-btn-standard:active {
+    transform: scale(0.98); 
+}
+
+
+.yesil-btn {
+    background-color: #16a34a; 
+}
+
+.yesil-koyu-btn {
+    background-color: #15803d; 
+}
+
+.mavi-btn {
+    background-color: #3b82f6; 
+}
+.mavi-btn:hover {
+    background-color: #2563eb; 
+}
+
+.gri-btn {
+    background-color: var(--bg);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+}
+.gri-btn:hover {
+    background-color: var(--border);
+    color: var(--text);
+}
+
+
+.excel-btn-standard, 
+.btn-primary,        
+.btn-success,        
+.btn-secondary,     
+.ekle-btn-mini       
+{
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+
+.excel-btn-standard:hover,
+.btn-primary:hover,
+.btn-success:hover,
+.btn-secondary:hover,
+.ekle-btn-mini:hover 
+{
+    transform: translateY(-3px); 
+    filter: brightness(110%);    
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+
+.excel-btn-standard:active,
+.btn-primary:active,
+.btn-success:active,
+.btn-secondary:active,
+.ekle-btn-mini:active
+{
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    filter: brightness(100%);
+}
