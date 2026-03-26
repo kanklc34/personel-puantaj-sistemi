@@ -2,7 +2,7 @@
 
 İnternet bağlantısı gerektirmeyen, tarayıcı tabanlı ve tamamen ücretsiz bir personel maaş/puantaj takip uygulamasıdır. İşçilerin günlük çalışma durumlarını kaydedebilir, maaş hesaplayabilir ve Excel raporu alabilirsiniz.
 
-🔗 **Canlı Demo:** [Projeyi İncelemek İçin Tıklayın](https://bit.ly/puantajsistem)
+🔗 **Canlı Demo:** [Projeyi İncelemek İçin Tıklayın]([https://bit.ly/puantajsistem](https://kanklc34.github.io/personel-puantaj-sistemi/))
 
 ## 🚀 Özellikler
 
